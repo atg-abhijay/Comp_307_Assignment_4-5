@@ -303,14 +303,17 @@
             <script>
                 var canvas = document.getElementById("myCanvas");
                 var context = canvas.getContext("2d");
-                var startingX = 170;
-                var startingY = 150;
+                /* the reason for using variables for
+                    starting x,y values is so that we
+                    can move the rocket as is by just
+                    changing the starting coordinates */
+                var startingX = 175;
+                var startingY = 160;
 
                 function drawRectangle(fillColor)
                 {
                     context.fillStyle = fillColor;
                     context.fillRect(startingX,startingY,60,135);
-
                 }
 
                 function draw(context) {
@@ -319,7 +322,7 @@
 
                 function drawTopTriangle() {
                     context.moveTo(startingX, startingY);
-                    context.lineTo(200, 100);
+                    context.lineTo(startingX + 30, startingY - 50);
                     context.lineTo(startingX + 60, startingY);
                     context.lineTo(startingX, startingY);
                     draw(context);
