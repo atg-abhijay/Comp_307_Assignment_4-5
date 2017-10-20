@@ -129,10 +129,28 @@
             }
 
         </style>
+
+        <script>
+            function changeColors() {
+                var choiceColor1 = "cyan"
+                var choiceColor2 = "orange"
+                var color = prompt("Please enter a color for the background. The only valid colors are " + choiceColor1 + " and " + choiceColor2);
+                if (color != choiceColor1 && color != choiceColor2) {
+                    alert("You have entered an invalid color");
+                }
+                else {
+                    var list = ["blog_name", "welcome"]
+                    for (i = 0; i < list.length-1; i++) {
+                        document.getElementById(list[i]).setAttribute("style", "background-color: " + color);
+                        document.getElementById(list[i+1]).setAttribute("style", "background-color: dark" + color);
+                    }
+                }
+            }
+        </script>
     </head>
 
     <body>
-        <p class="welcome_bar zero_top_bottom_margin left_padding">
+        <p id="welcome" class="welcome_bar zero_top_bottom_margin left_padding">
             Welcome, Guest
             <a class="welcome_bar_links" :visited :link
             href="https://www.facebook.com/login/" target="_blank">Login</a>
@@ -144,10 +162,11 @@
                 Stay Updated
                 <a class="welcome_bar_links" :visited :link href="https://www.lifewire.com/rss-101-3482781" target="_blank">Subscribe via RSS Feeds</a>
                 <a class="welcome_bar_links" :visited :link href="https://www.bell.ca/email-updates" target="_blank">Email Updates</a>
+                <input type="button" value="Colors" onclick="changeColors()">
             </span>
         </p>
 
-        <p class="blog_bar zero_top_bottom_margin">
+        <p id="blog_name" class="blog_bar zero_top_bottom_margin">
             My Blog     <span style="font-size: 27px">Description of My Blog</span>
         </p>
 
@@ -276,5 +295,57 @@
                 <span style="font-size: 17px; color: rgb(111, 182, 149);">Copyright &#169; 2009<br/>All rights reserved</span><br/><br/>
             </p>
         </div>
+
+        <p>
+            <canvas id="myCanvas" width="400px" height="300px" style="border: 5px solid goldenrod">
+                The browser doesn't seem to support canvas
+            </canvas>
+            <script>
+                var canvas = document.getElementById("myCanvas");
+                var context = canvas.getContext("2d");
+                var startingX = 170;
+                var startingY = 150;
+
+                function drawRectangle(fillColor)
+                {
+                    context.fillStyle = fillColor;
+                    context.fillRect(startingX,startingY,60,135);
+
+                }
+
+                function draw(context) {
+                    context.stroke();
+                }
+
+                function drawTopTriangle() {
+                    context.moveTo(startingX, startingY);
+                    context.lineTo(200, 100);
+                    context.lineTo(startingX + 60, startingY);
+                    context.lineTo(startingX, startingY);
+                    draw(context);
+                }
+
+                function drawSideTriangles() {
+                    // left triangle
+                    context.moveTo(startingX, startingY + 134);
+                    context.lineTo(startingX - 30, startingY + 134);
+                    context.lineTo(startingX, startingY + 104);
+                    draw(context);
+
+                    // right triangle
+                    context.moveTo(startingX + 60, startingY + 134);
+                    context.lineTo(startingX + 90, startingY + 134);
+                    context.lineTo(startingX + 60, startingY + 104);
+                    draw(context);
+                }
+
+                drawRectangle("#00BFFF");
+                context.lineWidth = 2;
+                context.strokeStyle = "green";
+                drawTopTriangle();
+                drawSideTriangles();
+
+            </script>
+        </p>
     </body>
 </html>
